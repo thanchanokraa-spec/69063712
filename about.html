@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RubyJust Cafe | About</title>
+  <style>
+    :root {
+      --primary-red: #c62828;
+      --dark-red: #8e0000;
+      --light-red: #ffebee;
+      --accent-white: #ffffff;
+      --text-dark: #333333;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--light-red);
+      color: var(--text-dark);
+    }
+    header {
+      background-color: var(--primary-red);
+      color: var(--accent-white);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--accent-white);
+      font-weight: bold;
+      font-size: 1.5rem;
+      gap: 10px;
+    }
+    .logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .logo-text span {
+      color: #ffcdd2;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--accent-white);
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      text-decoration: underline;
+    }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .menu-toggle span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: var(--accent-white);
+    }
+    .page-banner {
+      background-color: var(--primary-red);
+      color: var(--accent-white);
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    .page-banner h1 {
+      font-size: 2.5rem;
+      margin: 0 0 0.5rem 0;
+    }
+    .page-banner p {
+      font-size: 1.1rem;
+      margin: 0;
+      opacity: 0.9;
+    }
+    section {
+      padding: 5rem 2rem;
+    }
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-title {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .section-title h2 {
+      font-size: 2.25rem;
+      color: var(--dark-red);
+      margin-bottom: 0.5rem;
+    }
+    .section-title p {
+      color: #666;
+      font-size: 1.1rem;
+    }
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .hero-text {
+      flex: 1 1 400px;
+    }
+    .hero-image {
+      flex: 1 1 350px;
+      text-align: center;
+    }
+    .hero-image img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .team-card {
+      background: var(--accent-white);
+      padding: 2rem;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .team-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .team-card h3 {
+      color: var(--dark-red);
+      margin-bottom: 0.25rem;
+    }
+    .team-card .role {
+      color: var(--primary-red);
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .team-card p {
+      color: #555;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+    }
+    .feature-card {
+      background: var(--accent-white);
+      padding: 2rem;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .feature-card h3 {
+      color: var(--dark-red);
+      margin-bottom: 0.75rem;
+    }
+    .feature-card p {
+      color: #555;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+    .alt-bg {
+      background-color: #ffffff;
+    }
+    footer {
+      background-color: var(--dark-red);
+      color: var(--accent-white);
+      padding: 4rem 2rem 1.5rem;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .footer-inner > div {
+      flex: 1;
+      min-width: 220px;
+    }
+    .footer-inner h4 {
+      color: #ffcdd2;
+      font-size: 1.2rem;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    .footer-inner p {
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+    .footer-inner ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .footer-inner li {
+      margin-bottom: 8px;
+    }
+    .footer-inner a {
+      color: var(--accent-white);
+      text-decoration: none;
+      opacity: 0.9;
+    }
+    .footer-inner a:hover {
+      text-decoration: underline;
+      opacity: 1;
+    }
+    .footer-bottom {
+      text-align: center;
+      max-width: 1200px;
+      margin: 3rem auto 0;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding-top: 1.5rem;
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=100&q=80" alt="RubyJust Cafe logo" />
+        <span class="logo-text">RUBYJUST <span>CAFE</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="courses.html">Menu</a></li>
+        <li><a href="articles.html">Articles</a></li>
+        <li><a href="career.html">Career</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <section class="page-banner">
+     <h1>About RubyJust Cafe</h1>
+     <p>Delighting dessert lovers across Thailand with passion, quality, and sweet inspiration for over 5 years.</p>
+  </section>
+
+  <section>
+    <div class="section-inner">
+      <div class="hero-inner" style="align-items:center;">
+        <div class="hero-text" style="flex:1 1 400px;">
+          <h2 style="color: var(--dark-red); font-size: 26px; margin-bottom: 14px;">Our Story &amp; Inspiration</h2>
+          <p style="color: #555; line-height: 1.6; margin-bottom: 14px;">
+            RubyJust Cafe was born out of a deep personal passion for cakes and baking. Inspired by the cozy, aesthetically charming, and delightfully balanced flavors of Korean cafe culture, our founder dreamed of bringing that unique sweet experience right to Thailand. Over the past 5 years, we have grown from a small baking project into a beloved destination for dessert enthusiasts.
+          </p>
+          <p style="color: #555; line-height: 1.6; margin-bottom: 14px;">
+            We believe that a great cake should not only look stunning but also have an inviting taste that feels accessible to everyone. That is why we carefully select premium, high-quality ingredients &mdash; from fresh seasonal fruits to gourmet chocolate and imported dairy &mdash; ensuring every bite is pure perfection.
+          </p>
+          <p style="color: #555; line-height: 1.6;">
+            With a wide variety of menu items and flexible price ranges to suit every occasion, RubyJust Cafe proudly offers everything from classic shortcakes and rich fudges to custom celebration designs, welcoming everyone into our warm sanctuary of sweets.
+          </p>
+        </div>
+        <div class="hero-image" style="flex:1 1 350px;">
+          <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80" alt="Cozy interior of RubyJust Cafe" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt-bg">
+    <div class="section-inner">
+      <div class="section-title">
+        <h2>Meet Our Pastry Team</h2>
+        <p>The creative minds and master bakers behind our signature recipes.</p>
+      </div>
+
+      <div class="team-grid">
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=400&q=80" alt="Chef Ruby" />
+          <h3>Chef Ruby</h3>
+          <p class="role">Founder &amp; Head Pastry Chef</p>
+          <p>Passionate cake designer inspired by Korean culinary trends, dedicated to creating memorable flavor profiles.</p>
+        </div>
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=400&q=80" alt="Chef Just" />
+          <h3>Chef Just</h3>
+          <p class="role">Master Baker &amp; Product Developer</p>
+          <p>Expert in artisanal techniques and ingredient sourcing, ensuring top-tier quality across our diverse menu.</p>
+        </div>
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=400&q=80" alt="Chef Min" />
+          <h3>Chef Min</h3>
+          <p class="role">Custom Cake Specialist</p>
+          <p>Specializes in intricate decoration and bespoke styling for birthdays, weddings, and special life milestones.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-inner">
+      <div class="section-title">
+        <h2>Our Core Values</h2>
+        <p>Three principles that guide everything we bake and serve.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Uncompromised Quality</h3>
+          <p>We source only the finest ingredients to ensure rich, authentic flavors in every single slice.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Variety for Everyone</h3>
+          <p>With diverse choices across different price points, delicious desserts are always within reach.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Heartfelt Hospitality</h3>
+          <p>Every customer is welcomed like family into our cozy cafe environment designed for sweet moments.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <h4>RubyJust Cafe</h4>
+        <p>Helping dessert lovers satisfy their sweet tooth with premium handmade cakes and cozy cafe experiences.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="courses.html">Menu</a></li>
+          <li><a href="articles.html">Articles</a></li>
+          <li><a href="career.html">Career</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Phone: 089-123-4567</li>
+          <li>Email: info@rubyjustcafe.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; <span id="year"></span> RubyJust Cafe. This is an example website built for a web design class.
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

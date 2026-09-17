@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RubyJust Cafe | Locations</title>
+  <style>
+    :root {
+      --primary-red: #c62828;
+      --dark-red: #8e0000;
+      --light-red: #ffebee;
+      --accent-white: #ffffff;
+      --text-dark: #333333;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--light-red);
+      color: var(--text-dark);
+    }
+    header {
+      background-color: var(--primary-red);
+      color: var(--accent-white);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--accent-white);
+      font-weight: bold;
+      font-size: 1.5rem;
+      gap: 10px;
+    }
+    .logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .logo-text span {
+      color: #ffcdd2;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--accent-white);
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      text-decoration: underline;
+    }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .menu-toggle span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: var(--accent-white);
+    }
+    .page-banner {
+      background-color: var(--primary-red);
+      color: var(--accent-white);
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    .page-banner h1 {
+      font-size: 2.5rem;
+      margin: 0 0 0.5rem 0;
+    }
+    .page-banner p {
+      font-size: 1.1rem;
+      margin: 0;
+      opacity: 0.9;
+    }
+    section {
+      padding: 5rem 2rem;
+    }
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    .article-card {
+      background: var(--accent-white);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s;
+    }
+    .article-card:hover {
+      transform: translateY(-5px);
+    }
+    .article-img img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .article-body {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .article-date {
+      color: var(--primary-red);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .article-body h3 {
+      color: var(--dark-red);
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+      font-size: 1.25rem;
+    }
+    .article-body p {
+      color: #555;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+    .read-more {
+      color: var(--primary-red);
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+    .read-more:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+    footer {
+      background-color: var(--dark-red);
+      color: var(--accent-white);
+      padding: 4rem 2rem 1.5rem;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .footer-inner > div {
+      flex: 1;
+      min-width: 220px;
+    }
+    .footer-inner h4 {
+      color: #ffcdd2;
+      font-size: 1.2rem;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    .footer-inner p {
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+    .footer-inner ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .footer-inner li {
+      margin-bottom: 8px;
+    }
+    .footer-inner a {
+      color: var(--accent-white);
+      text-decoration: none;
+      opacity: 0.9;
+    }
+    .footer-inner a:hover {
+      text-decoration: underline;
+      opacity: 1;
+    }
+    .footer-bottom {
+      text-align: center;
+      max-width: 1200px;
+      margin: 3rem auto 0;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding-top: 1.5rem;
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=100&q=80" alt="RubyJust Cafe logo" />
+        <span class="logo-text">RUBYJUST <span>CAFE</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="courses.html">Menu</a></li>
+        <li><a href="articles.html" class="active">Articles</a></li>
+        <li><a href="career.html">Career</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <section class="page-banner">
+    <h1>Our Locations &amp; News</h1>
+    <p>Find your nearest RubyJust Cafe among our 50 branches nationwide across Thailand, featuring our flagship store in Bang Khen.</p>
+  </section>
+
+  <section>
+    <div class="section-inner">
+      <div class="articles-grid">
+
+        <div class="article-card">
+          <div class="article-img"><img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80" alt="Flagship Branch" /></div>
+          <div class="article-body">
+            <div class="article-date">May 12, 2026</div>
+            <h3>Flagship Store Spotlight: Bang Khen Branch</h3>
+            <p>
+              Located right in the heart of Bang Khen, our flagship cafe offers a cozy Korean-inspired ambiance complete with premium cake displays and spacious seating for sweet moments.
+            </p>
+            <a href="#" class="read-more">View Details &rarr;</a>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-img"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80" alt="Nationwide Expansion" /></div>
+          <div class="article-body">
+            <div class="article-date">April 3, 2026</div>
+            <h3>Celebrating 50 Branches Across Thailand</h3>
+            <p>
+              From Bangkok to major provinces nationwide, our network of 50 branches ensures you are never too far away from your favorite handmade strawberry cheesecakes and banoffee pies.
+            </p>
+            <a href="#" class="read-more">Find Nearest Branch &rarr;</a>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-img"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80" alt="New Branch Opening" /></div>
+          <div class="article-body">
+            <div class="article-date">February 20, 2026</div>
+            <h3>New Metropolitan Branches Opening Soon</h3>
+            <p>
+              We are expanding our reach to bring high-quality, accessible Korean-style desserts closer to your neighborhoods with upcoming branches in major lifestyle hubs.
+            </p>
+            <a href="#" class="read-more">Read More &rarr;</a>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-img"><img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=600&q=80" alt="Cafe Experience" /></div>
+          <div class="article-body">
+            <div class="article-date">January 15, 2026</div>
+            <h3>What Makes Every RubyJust Cafe Feel Like Home</h3>
+            <p>
+              Discover the design philosophy behind our 50 locations, ensuring consistent warmth, exquisite pastel aesthetics, and welcoming service across Thailand.
+            </p>
+            <a href="#" class="read-more">Read More &rarr;</a>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-img"><img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=600&q=80" alt="Customer Service" /></div>
+          <div class="article-body">
+            <div class="article-date">December 2, 2025</div>
+            <h3>Centralized Quality Control for All 50 Branches</h3>
+            <p>
+              How our master bakers maintain strict quality standards and fresh daily deliveries so every slice of cake tastes just as amazing no matter which branch you visit.
+            </p>
+            <a href="#" class="read-more">Read More &rarr;</a>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-img"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80" alt="Community Event" /></div>
+          <div class="article-body">
+            <div class="article-date">November 8, 2025</div>
+            <h3>Anniversary Celebrations at Our Bang Khen Headquarters</h3>
+            <p>
+              A look back at our journey from a single dream to 50 thriving locations nationwide, featuring special promotions and loyalty rewards for our valued customers.
+            </p>
+            <a href="#" class="read-more">Read More &rarr;</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <h4>RubyJust Cafe</h4>
+        <p>Helping dessert lovers satisfy their sweet tooth with premium handmade cakes and cozy cafe experiences.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="courses.html">Menu</a></li>
+          <li><a href="articles.html">Articles</a></li>
+          <li><a href="career.html">Career</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Phone: 089-123-4567</li>
+          <li>Email: info@rubyjustcafe.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; <span id="year"></span> RubyJust Cafe. This is an example website built for a web design class.
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

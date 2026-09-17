@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RubyJust Cafe | Careers</title>
+  <style>
+    :root {
+      --primary-red: #c62828;
+      --dark-red: #8e0000;
+      --light-red: #ffebee;
+      --accent-white: #ffffff;
+      --text-dark: #333333;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--light-red);
+      color: var(--text-dark);
+    }
+    header {
+      background-color: var(--primary-red);
+      color: var(--accent-white);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--accent-white);
+      font-weight: bold;
+      font-size: 1.5rem;
+      gap: 10px;
+    }
+    .logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .logo-text span {
+      color: #ffcdd2;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--accent-white);
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      text-decoration: underline;
+    }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .menu-toggle span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: var(--accent-white);
+    }
+    .page-banner {
+      background-color: var(--primary-red);
+      color: var(--accent-white);
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    .page-banner h1 {
+      font-size: 2.5rem;
+      margin: 0 0 0.5rem 0;
+    }
+    .page-banner p {
+      font-size: 1.1rem;
+      margin: 0;
+      opacity: 0.9;
+    }
+    section {
+      padding: 5rem 2rem;
+    }
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-title {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .section-title h2 {
+      font-size: 2.25rem;
+      color: var(--dark-red);
+      margin-bottom: 0.5rem;
+    }
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .hero-text {
+      flex: 1 1 400px;
+    }
+    .hero-image {
+      flex: 1 1 350px;
+      text-align: center;
+    }
+    .hero-image img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+    .job-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .job-card {
+      background: var(--accent-white);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .job-card-img {
+      flex: 0 0 240px;
+      height: 180px;
+    }
+    .job-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .job-card-content {
+      padding: 2rem;
+      flex: 1 1 300px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .job-card-content > div {
+      flex: 1 1 250px;
+    }
+    .job-tag {
+      display: inline-block;
+      background-color: var(--light-red);
+      color: var(--primary-red);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-right: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .job-card h3 {
+      color: var(--dark-red);
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-size: 1.25rem;
+    }
+    .job-card p {
+      color: #555;
+      font-size: 0.95rem;
+      margin: 0;
+      line-height: 1.5;
+    }
+    .perks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .feature-card {
+      background: var(--accent-white);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+    .feature-card-img img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .feature-card-body {
+      padding: 2rem;
+    }
+    .feature-card h3 {
+      color: var(--dark-red);
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+    }
+    .feature-card p {
+      color: #555;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+    .alt-bg {
+      background-color: #ffffff;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+    .btn-primary {
+      background-color: var(--dark-red);
+      color: var(--accent-white);
+    }
+    .btn-primary:hover {
+      background-color: var(--primary-red);
+      transform: translateY(-2px);
+    }
+    footer {
+      background-color: var(--dark-red);
+      color: var(--accent-white);
+      padding: 4rem 2rem 1.5rem;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .footer-inner > div {
+      flex: 1;
+      min-width: 220px;
+    }
+    .footer-inner h4 {
+      color: #ffcdd2;
+      font-size: 1.2rem;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    .footer-inner p {
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+    .footer-inner ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .footer-inner li {
+      margin-bottom: 8px;
+    }
+    .footer-inner a {
+      color: var(--accent-white);
+      text-decoration: none;
+      opacity: 0.9;
+    }
+    .footer-inner a:hover {
+      text-decoration: underline;
+      opacity: 1;
+    }
+    .footer-bottom {
+      text-align: center;
+      max-width: 1200px;
+      margin: 3rem auto 0;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding-top: 1.5rem;
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+      .job-card-img {
+        flex: 0 0 100%;
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=100&q=80" alt="RubyJust Cafe logo" />
+        <span class="logo-text">RUBYJUST <span>CAFE</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="courses.html">Menu</a></li>
+        <li><a href="articles.html">Articles</a></li>
+        <li><a href="career.html" class="active">Career</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <section class="page-banner">
+    <h1>Special Event Cakes &amp; Catering</h1>
+    <p>Handmade custom cakes for every milestone and professional snack box catering delivered nationwide across Thailand.</p>
+  </section>
+
+  <section>
+    <div class="section-inner">
+      <div class="hero-inner" style="align-items:center;">
+        <div class="hero-text" style="flex:1 1 400px;">
+          <h2 style="color: var(--dark-red); font-size: 26px; margin-bottom: 14px;">Custom Cakes &amp; Snack Boxes</h2>
+          <p style="color: #555; line-height: 1.6;">
+            At RubyJust Cafe, we turn your special moments into unforgettable memories with our bespoke event cakes. Whether you are celebrating a wedding, a birthday, hosting a gender reveal party, orchestrating a sweet surprise, or marking Valentine's Day, our expert pastry chefs craft each creation with premium ingredients and gorgeous Korean-inspired aesthetics. Additionally, we provide premium snack box catering services across all provinces in Thailand.
+          </p>
+        </div>
+        <div class="hero-image" style="flex:1 1 350px;">
+          <img src="https://images.unsplash.com/photo-1535141192574-5d4897c13136?auto=format&fit=crop&w=600&q=80" alt="Custom event cake display" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt-bg">
+    <div class="section-inner">
+      <div class="section-title">
+        <h2>Event Services &amp; Catering</h2>
+      </div>
+
+      <div class="job-list">
+        <div class="job-card">
+          <div class="job-card-img">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80" alt="Wedding Cake" />
+          </div>
+          <div class="job-card-content">
+            <div>
+              <span class="job-tag">Custom Order</span>
+              <span class="job-tag">Celebration</span>
+              <h3>Wedding Cakes</h3>
+              <p>Elegant, multi-tiered custom wedding cakes designed to match your theme and provide an exquisite taste for your guests.</p>
+            </div>
+            <a href="contact.html" class="btn btn-primary">Book Consultation</a>
+          </div>
+        </div>
+
+        <div class="job-card">
+          <div class="job-card-img">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" alt="Birthday and Surprise Cakes" />
+          </div>
+          <div class="job-card-content">
+            <div>
+              <span class="job-tag">Custom Order</span>
+              <span class="job-tag">Celebration</span>
+              <h3>Birthday &amp; Surprise Cakes</h3>
+              <p>Personalized birthday and surprise cakes crafted with unique designs, vibrant colors, and delicious fillings.</p>
+            </div>
+            <a href="contact.html" class="btn btn-primary">Order Now</a>
+          </div>
+        </div>
+
+        <div class="job-card">
+          <div class="job-card-img">
+            <img src="https://images.unsplash.com/photo-1535141192574-5d4897c13136?auto=format&fit=crop&w=600&q=80" alt="Gender Reveal and Valentine Cakes" />
+          </div>
+          <div class="job-card-content">
+            <div>
+              <span class="job-tag">Special Event</span>
+              <span class="job-tag">Celebration</span>
+              <h3>Gender Reveal &amp; Valentine's Cakes</h3>
+              <p>Exciting reveal cakes with hidden color centers and romantic Valentine's themed designs tailored for your loved ones.</p>
+            </div>
+            <a href="contact.html" class="btn btn-primary">Order Now</a>
+          </div>
+        </div>
+
+        <div class="job-card">
+          <div class="job-card-img">
+            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80" alt="Snack Box Catering" />
+          </div>
+          <div class="job-card-content">
+            <div>
+              <span class="job-tag">Catering Service</span>
+              <span class="job-tag">Nationwide</span>
+              <h3>Snack Box Catering</h3>
+              <p>Curated snack boxes featuring our signature pastries and baked goods, perfect for meetings, seminars, and events across Thailand.</p>
+            </div>
+            <a href="contact.html" class="btn btn-primary">Request Quote</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-inner">
+      <div class="section-title">
+        <h2>Why Choose RubyJust Events</h2>
+      </div>
+      <div class="perks-grid">
+        <div class="feature-card">
+          <div class="feature-card-img">
+            <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=600&q=80" alt="Bespoke Designs" />
+          </div>
+          <div class="feature-card-body">
+            <h3>Bespoke Designs</h3>
+            <p>Every cake is custom-tailored to suit your exact vision, color palette, and event theme requirements.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-img">
+            <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&q=80" alt="Premium Quality" />
+          </div>
+          <div class="feature-card-body">
+            <h3>Premium Quality</h3>
+            <p>We use only high-grade imported dairy and fresh ingredients, ensuring exceptional flavor in every slice.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-img">
+            <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80" alt="Nationwide Delivery" />
+          </div>
+          <div class="feature-card-body">
+            <h3>Nationwide Delivery</h3>
+            <p>Reliable handling and delivery coordination to ensure your event cakes and snack boxes arrive fresh and pristine.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <h4>RubyJust Cafe</h4>
+        <p>Helping dessert lovers satisfy their sweet tooth with premium handmade cakes and cozy cafe experiences.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="courses.html">Menu</a></li>
+          <li><a href="articles.html">Articles</a></li>
+          <li><a href="career.html">Career</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Phone: 089-123-4567</li>
+          <li>Email: info@rubyjustcafe.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; <span id="year"></span> RubyJust Cafe. This is an example website built for a web design class.
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
